@@ -11,10 +11,7 @@
   "author": "Carl Callmer",
   "license": "ISC",
   "dependencies": {
-    "axios": "^0.16.1",
-    "d3": "^4.9.1",
-    "datamaps": "^0.5.8",
-    "topojson": "^3.0.0"
+    "d3": "^4.9.1"
   },
   "devDependencies": {
     "babel-core": "^6.24.1",

@@ -2,66 +2,67 @@
 import "../styles/main.sass"
 
 import * as d3 from "d3"
-import topojson from "topojson"
-import axios from "axios"
-import Datamap from 'datamaps'
 
-const URL = "https://raw.githubusercontent.com/FreeCodeCamp/ProjectReferenceData/master/meteorite-strike-data.json"
+const	margin = { top: 50, left: 50, right: 50, bottom: 50 },
+			width = 800 - margin.top - margin.bottom,
+			height = 400 - margin.left - margin.right
 
-axios.get(URL) 
-		.then((response) => {
+			// sort strikes by mass, smallest last
 
-			var strikes = response.data.features
-
-
-			// map the data from response.data.features in a new array of objects
-				// each object should contain latitude, longitude and radius (from mass)
-					// plus: Name, Date, Mass, Class, Fillkey based on mass
-
-			console.log(d3.min(strikes, (d) => {return d.mass}),d3.max(strikes, (d) => {return d.mass}))
-
+			// plus: radius, Fillkey based on mass
 
 			// Tooltip
 			// Zoom
 
-			var meteoriteMap = new Datamap({
-			  element: document.getElementById('mapContainer'),
-			  scope: 'world',
-			  projection: 'mercator',
-			  geographyConfig: {
-			      popupOnHover: false,
-			      highlightOnHover: false
-			  },
-			  fills: {
-			    // 'USA': '#1f77b4',
-			    // 'RUS': '#9467bd',
-			    // 'PRK': '#ff7f0e',
-			    // 'PRC': '#2ca02c',
-			    // 'IND': '#e377c2',
-			    // 'GBR': '#8c564b',
-			    // 'FRA': '#d62728',
-			    // 'PAK': '#7f7f7f',
-			    defaultFill: '#000'
-			  },
-			  data: {
-			    'RUS': {fillKey: 'RUS'},
-			    'PRK': {fillKey: 'PRK'},
-			    'PRC': {fillKey: 'PRC'},
-			    'IND': {fillKey: 'IND'},
-			    'GBR': {fillKey: 'GBR'},
-			    'FRA': {fillKey: 'FRA'},
-			    'PAK': {fillKey: 'PAK'},
-			    'USA': {fillKey: 'USA'}
-			  }
-			})
 
-			meteoriteMap.bubbles(strikes, {
-			    popupTemplate: (geography, data) => { 
-			      return ['<div class="hoverinfo"><strong>' +  data.name + '</strong>'].join('')
-					}
-			})
+var chart = d3.select(".chart")
+		.attr("width", width)
+		.attr("height", height)
 
-		})
-		.catch((error) => {
-			console.error(error)
-		})
+d3.queue()
+	.defer(d3.json, "https://unpkg.com/world-atlas@1.1.4/world/50m.json")
+	.defer(d3.json, "https://raw.githubusercontent.com/FreeCodeCamp/ProjectReferenceData/master/meteorite-strike-data.json")
+	.await(ready)
+
+var projection = d3.geoMercator()
+	.translate([ width / 2, height / 2 ])
+	.scale(75) //Zoom ???
+
+var path = d3.geoPath()
+	.projection(projection)
+
+function ready (error, data, strikes) {
+	console.log(data)
+
+	var land = topojson.feature(data, data.objects.land).features
+	
+	console.log("land", land);
+
+	chart.append("g")
+				.attr("class", "landContainer")
+			.selectAll(".land")
+			.data(land)
+			.enter()
+			.append("path")
+				.attr("class", "land")
+				.attr("d", path)
+
+	chart.append("g")
+					.attr("class", "strikesCollection")
+				.selectAll(".strike")
+				.data(strikes.features)
+				.enter()
+				.append("circle")
+					.attr("r", 2)
+					.attr("cx", (d) => {
+						var coords = projection([d.properties.reclong, d.properties.reclat,])
+						return coords[0]
+					})
+					.attr("cy", (d) => {
+						var coords = projection([d.properties.reclong, d.properties.reclat,])
+						return coords[1]
+					})
+
+
+	console.log(strikes)
+}
