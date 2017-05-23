@@ -27,55 +27,56 @@
 body
 	padding: 40px 0
 	h1
-		// margin-bottom: 10px
+		margin-bottom: 5px
+		margin-top: 5px
 		font-size: 36px
 
 .card
-	width: 920px
+	width: 850px
+	height: 567px
 	background: orange
 	margin: 0 auto
 	position: relative
-	padding-bottom: 10px
+	padding: 0
 	text-align: center
 	// border-radius: 10px
 	// opacity: 0.90
+	.toolTip
+		position: absolute
+		z-index: 2
+		text-align: center
+		width: auto
+		font-size: 18px
+		font-weight: bold
+		padding: 5px
+		border-radius: 5px
+		pointer-events: none
+		box-shadow: 3px 3px 6px rgba(#000, 0.2)
+		background-color: Plum
+		opacity: 0
+		p
+			margin: 0
 
 .chart
 	position: relative
 	background-color: white
 	margin: 0 auto
 	border: 1px solid black
+	user-select: none
 
 .land
 	fill: #ccc
 	stroke: #333
 	stroke-width: 0.5
 
+.legendRing
+	fill: transparent
+	stroke: black
 
-
-// 	.toolTip
-// 		position: absolute
-// 		z-index: 2
-// 		text-align: center
-// 		width: auto
-// 		font-size: 18px
-// 		font-weight: bold
-// 		padding: 5px
-// 		border-radius: 5px
-// 		pointer-events: none
-// 		box-shadow: 3px 3px 6px rgba(#000, 0.2)
-// 		background-color: Plum
-// 		opacity: 0
-// 		p
-// 			margin: 0
-
-// .forceBox
-// 	height: 700px
-// 	min-height: 100px
-// 	position: relative
-// 	.chart
-// 		position: relative
-
-// .flag
-// 	position: absolute
-// 	user-select: none
+.strike
+	opacity: 0.7
+	cursor: pointer
+	stroke: black
+	stroke-width: 0.8
+	&:hover
+		fill: white
