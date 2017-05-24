@@ -4,55 +4,52 @@
 	padding: 0
 	box-sizing: border-box
 
-// $light-gradient: #f5baff
-// $dark-gradient: #c20fde
+$light-gradient: #ffeaba
+$dark-gradient: #de640e
 
-// @mixin gradient($light, $dark)
-// 	background: rgba($light,1)
-// 	background: -moz-linear-gradient(45deg, rgba($light,1) 0%, rgba($dark,1) 100%)
-// 	background: -webkit-gradient(left bottom, right top, color-stop(0%, rgba($light,1)), color-stop(100%, rgba($dark,1)))
-// 	background: -webkit-linear-gradient(45deg, rgba($light,1) 0%, rgba($dark,1) 100%)
-// 	background: -o-linear-gradient(45deg, rgba($light,1) 0%, rgba($dark,1) 100%)
-// 	background: -ms-linear-gradient(45deg, rgba($light,1) 0%, rgba($dark,1) 100%)
-// 	background: linear-gradient(45deg, rgba($light,1) 0%, rgba($dark,1) 100%)
-// 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=$light, endColorstr=$dark, GradientType=1 )
-// 	background-repeat: no-repeat
-// 	background-attachment: fixed
+@mixin gradient($light, $dark)
+	background: rgba($light,1)
+	background: -moz-linear-gradient(45deg, rgba($light,1) 0%, rgba($dark,1) 100%)
+	background: -webkit-gradient(left bottom, right top, color-stop(0%, rgba($light,1)), color-stop(100%, rgba($dark,1)))
+	background: -webkit-linear-gradient(45deg, rgba($light,1) 0%, rgba($dark,1) 100%)
+	background: -o-linear-gradient(45deg, rgba($light,1) 0%, rgba($dark,1) 100%)
+	background: -ms-linear-gradient(45deg, rgba($light,1) 0%, rgba($dark,1) 100%)
+	background: linear-gradient(45deg, rgba($light,1) 0%, rgba($dark,1) 100%)
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=$light, endColorstr=$dark, GradientType=1 )
+	background-repeat: no-repeat
+	background-attachment: fixed
 
-// html, body
-// 	height: 100%
-// 	font-family: Helvetica, sans-serif
-// 	@include gradient($light-gradient, $dark-gradient)
+html, body
+	height: 100%
+	font-family: Helvetica, sans-serif
+	@include gradient($light-gradient, $dark-gradient)
 
 body
 	padding: 40px 0
 	h1
-		margin-bottom: 5px
-		margin-top: 5px
+		margin-top: 10px
 		font-size: 36px
 
 .card
 	width: 850px
-	height: 567px
-	background: orange
+	height: 580px
+	background: white
 	margin: 0 auto
-	position: relative
 	padding: 0
 	text-align: center
-	// border-radius: 10px
-	// opacity: 0.90
+	border-radius: 10px
+	opacity: 0.90
 	.toolTip
 		position: absolute
+		text-align: left
 		z-index: 2
-		text-align: center
 		width: auto
 		font-size: 18px
-		font-weight: bold
-		padding: 5px
+		padding: 5px 10px 5px 10px
 		border-radius: 5px
 		pointer-events: none
 		box-shadow: 3px 3px 6px rgba(#000, 0.2)
-		background-color: Plum
+		background-color: #FFA07A
 		opacity: 0
 		p
 			margin: 0
